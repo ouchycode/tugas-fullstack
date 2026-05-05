@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+@import "tailwindcss";
+
+/* ── Linear-style Design Tokens ── */
+:root {
+  --accent:        #5e6ad2;
+  --accent-hover:  #4f5bbf;
+  --accent-dim:    rgba(94,106,210,0.1);
+  --accent-border: rgba(94,106,210,0.3);
+  --green:         #4caf7d;
+  --green-dim:     rgba(76,175,125,0.1);
+  --green-border:  rgba(76,175,125,0.25);
+  --amber:         #d4a853;
+  --amber-dim:     rgba(212,168,83,0.1);
+  --red:           #e85d4a;
+
+  --bg:            #08090a;
+  --bg-1:          #0d0e10;
+  --bg-2:          #131417;
+  --bg-3:          #1a1c20;
+  --bg-hover:      #1e2024;
+
+  --border:        rgba(255,255,255,0.06);
+  --border-1:      rgba(255,255,255,0.09);
+  --border-2:      rgba(255,255,255,0.13);
+
+  --fg:            #e8e8e8;
+  --fg-1:          #b0b0b8;
+  --fg-2:          #666672;
+  --fg-3:          #3a3a44;
+
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r:    8px;
+  --r-lg: 10px;
+  --r-xl: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--fg-3); border-radius: 99px; }
+
+::selection { background: rgba(94,106,210,0.25); }
+
+/* ── Buttons ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.006em;
+  padding: 7px 14px;
+  border-radius: var(--r-sm);
+  border: none;
+  cursor: pointer;
+  transition: background 0.12s, box-shadow 0.12s, transform 0.08s;
+  text-decoration: none;
+  white-space: nowrap;
+  background: var(--accent);
+  color: #fff;
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background 0.12s;
+}
+.btn-primary:hover::after { background: rgba(255,255,255,0.07); }
+.btn-primary:active { transform: scale(0.97); }
+.btn-primary:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.006em;
+  padding: 7px 14px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: all 0.12s;
+  text-decoration: none;
+  white-space: nowrap;
+  background: var(--bg-2);
+  color: var(--fg-1);
+  border: 1px solid var(--border-1);
+  line-height: 1;
+}
+.btn-secondary:hover {
+  background: var(--bg-3);
+  border-color: var(--border-2);
+  color: var(--fg);
+}
+.btn-secondary:active { transform: scale(0.97); }
+
+/* ── Input fields ── */
+.input-field {
+  width: 100%;
+  padding: 8px 11px;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--fg);
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-sm);
+  outline: none;
+  transition: border-color 0.12s, box-shadow 0.12s, background 0.12s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.input-field:hover  { border-color: var(--border-2); background: var(--bg-2); }
+.input-field:focus  { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(94,106,210,0.12); background: var(--bg-2); }
+.input-field::placeholder { color: var(--fg-3); }
+.input-field option { background: #1a1c20; }
+
+/* ── Utility ── */
+.label-mono {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+.label-accent {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ── Focus ── */
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
+}
+
+/* ── Subtle grid bg ── */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.024) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ── Shimmer animation ── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── Responsive hidden/show ── */
+@media (max-width: 768px) {
+  .hide-mobile { display: none !important; }
+}
+@media (min-width: 769px) {
+  .hide-desktop { display: none !important; }
+}
