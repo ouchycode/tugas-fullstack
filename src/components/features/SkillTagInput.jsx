@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { X } from 'lucide-react';
 
 const SkillTagInput = ({ value, onChange }) => {
-  const [input, setInput] = useState('');
+  const [input,   setInput]   = useState('');
   const [focused, setFocused] = useState(false);
   const inputRef = useRef(null);
 
@@ -21,40 +21,17 @@ const SkillTagInput = ({ value, onChange }) => {
   return (
     <div
       onClick={() => inputRef.current?.focus()}
-      style={{
-        background: 'var(--bg-1)',
-        border: `1px solid ${focused ? 'var(--accent)' : 'var(--border-1)'}`,
-        borderRadius: 'var(--r-sm)',
-        padding: '7px 10px',
-        minHeight: 40,
-        cursor: 'text',
-        transition: 'border-color 0.12s, box-shadow 0.12s',
-        boxShadow: focused ? '0 0 0 3px rgba(94,106,210,0.12)' : 'none',
-      }}
+      className={`skill-tag-wrap ${focused ? 'skill-tag-wrap--focused' : ''}`}
+      style={{ border: `1px solid ${focused ? 'var(--indigo)' : 'var(--border-1)'}` }}
     >
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, alignItems: 'center' }}>
+      <div className="skill-tag-list">
         {value.map(s => (
-          <span key={s} style={{
-            display: 'inline-flex', alignItems: 'center', gap: 4,
-            fontSize: 11.5, fontWeight: 500,
-            padding: '2px 7px', borderRadius: 'var(--r-xs)',
-            background: 'rgba(94,106,210,0.1)',
-            color: 'var(--accent)',
-            border: '1px solid rgba(94,106,210,0.22)',
-            letterSpacing: '-0.005em',
-          }}>
+          <span key={s} className="skill-tag">
             {s}
             <button
               type="button"
+              className="skill-tag__remove"
               onClick={() => onChange(value.filter(x => x !== s))}
-              style={{
-                background: 'none', border: 'none', cursor: 'pointer',
-                color: 'rgba(94,106,210,0.5)', lineHeight: 1, padding: 0,
-                display: 'flex', alignItems: 'center',
-                transition: 'color 0.1s',
-              }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
-              onMouseLeave={e => e.currentTarget.style.color = 'rgba(94,106,210,0.5)'}
             >
               <X size={10} />
             </button>
@@ -68,13 +45,7 @@ const SkillTagInput = ({ value, onChange }) => {
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           placeholder={value.length === 0 ? 'React, Figma, Node.js...' : '+ tambah'}
-          style={{
-            background: 'none', border: 'none', outline: 'none',
-            fontFamily: 'var(--font)', fontSize: 13,
-            color: 'var(--fg)', minWidth: 100, flex: 1,
-            padding: '1px 0',
-            letterSpacing: '-0.005em',
-          }}
+          className="skill-tag-input"
         />
       </div>
     </div>

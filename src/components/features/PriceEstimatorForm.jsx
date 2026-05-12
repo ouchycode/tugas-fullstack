@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-import { Send, AlertCircle, ChevronDown } from 'lucide-react';
+import { Send, AlertCircle, ChevronDown, Check } from 'lucide-react';
+import * as Select from '@radix-ui/react-select';
+import * as Label from '@radix-ui/react-label';
 import SkillTagInput from './SkillTagInput';
 import { predictPrice } from '../../services/api';
 
 const CATEGORIES = [
-  'Web Development','Mobile Development','UI/UX Design',
-  'Data Science','Content Writing','Digital Marketing',
-  'Video Editing','Graphic Design','SEO','Copywriting',
+  'Web Development', 'Mobile Development', 'UI/UX Design',
+  'Data Science', 'Content Writing', 'Digital Marketing',
+  'Video Editing', 'Graphic Design', 'SEO', 'Copywriting',
 ];
 
-const FieldLabel = ({ children, hint }) => (
-  <div style={{ marginBottom: 7 }}>
-    <label className="label-mono" style={{ fontSize: 10.5 }}>{children}</label>
-    {hint && <span style={{ fontSize: 11, color: 'var(--fg-3)', marginLeft: 6 }}>{hint}</span>}
+const FieldLabel = ({ htmlFor, children, hint }) => (
+  <div style={{ marginBottom: 7, display: 'flex', alignItems: 'center', gap: 6 }}>
+    <Label.Root htmlFor={htmlFor} className="label-mono" style={{ fontSize: 10.5, cursor: 'default' }}>
+      {children}
+    </Label.Root>
+    {hint && <span style={{ fontSize: 11, color: 'var(--fg-3)' }}>{hint}</span>}
   </div>
 );
 
@@ -42,32 +46,35 @@ const PriceEstimatorForm = ({ onResult }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{
-      background: 'var(--bg-1)',
-      border: '1px solid var(--border)',
-      borderRadius: 'var(--r-xl)',
-      padding: 22,
-      display: 'flex', flexDirection: 'column', gap: 18,
-    }}>
+    <form onSubmit={handleSubmit} className="form-card">
 
       {/* Kategori */}
       <div>
         <FieldLabel>Kategori Jasa</FieldLabel>
-        <div style={{ position: 'relative' }}>
-          <select
-            value={category}
-            onChange={e => setCategory(e.target.value)}
-            className="input-field"
-            style={{ paddingRight: 34, cursor: 'pointer' }}
+        <Select.Root value={category} onValueChange={setCategory}>
+          <Select.Trigger
+            className="select-trigger"
+            style={{ color: category ? 'var(--fg)' : 'var(--fg-3)' }}
           >
-            <option value="">Pilih kategori...</option>
-            {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-          </select>
-          <ChevronDown size={12} color="var(--fg-3)" style={{
-            position: 'absolute', right: 11, top: '50%',
-            transform: 'translateY(-50%)', pointerEvents: 'none',
-          }} />
-        </div>
+            <Select.Value placeholder="Pilih kategori..." />
+            <Select.Icon><ChevronDown size={12} color="var(--fg-3)" /></Select.Icon>
+          </Select.Trigger>
+
+          <Select.Portal>
+            <Select.Content position="popper" sideOffset={4} className="select-content">
+              <Select.Viewport>
+                {CATEGORIES.map(c => (
+                  <Select.Item key={c} value={c} className="select-item">
+                    <Select.ItemText>{c}</Select.ItemText>
+                    <Select.ItemIndicator>
+                      <Check size={11} color="var(--accent)" />
+                    </Select.ItemIndicator>
+                  </Select.Item>
+                ))}
+              </Select.Viewport>
+            </Select.Content>
+          </Select.Portal>
+        </Select.Root>
       </div>
 
       {/* Skills */}
@@ -78,9 +85,11 @@ const PriceEstimatorForm = ({ onResult }) => {
 
       {/* Durasi */}
       <div>
-        <FieldLabel>Durasi Pengerjaan</FieldLabel>
+        <FieldLabel htmlFor="duration-input">Durasi Pengerjaan</FieldLabel>
         <input
-          type="number" min="1"
+          id="duration-input"
+          type="number"
+          min="1"
           value={duration}
           onChange={e => setDuration(e.target.value)}
           placeholder="jumlah hari, contoh: 14"
@@ -90,26 +99,21 @@ const PriceEstimatorForm = ({ onResult }) => {
 
       {/* Error */}
       {error && (
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: 8,
-          background: 'rgba(232,93,74,0.08)',
-          border: '1px solid rgba(232,93,74,0.2)',
-          borderRadius: 'var(--r-sm)',
-          padding: '9px 12px',
-        }}>
-          <AlertCircle size={13} color="var(--red)" />
-          <span style={{ fontSize: 12, color: 'var(--red)', letterSpacing: '-0.005em' }}>{error}</span>
+        <div className="alert alert--error" style={{ marginBottom: 0 }}>
+          <AlertCircle size={13} color="var(--red)" style={{ flexShrink: 0 }} />
+          <span className="alert__text">{error}</span>
         </div>
       )}
 
-      {/* Divider */}
-      <div style={{ height: 1, background: 'var(--border)', margin: '0 -2px' }} />
+      <div className="form-divider" />
 
       {/* Submit */}
-      <button type="submit" disabled={loading} className="btn-primary" style={{
-        width: '100%', padding: '9px 16px', fontSize: 13.5,
-        justifyContent: 'center',
-      }}>
+      <button
+        type="submit"
+        disabled={loading}
+        className="btn-primary"
+        style={{ width: '100%', padding: '9px 16px', fontSize: 13.5, justifyContent: 'center' }}
+      >
         {loading
           ? <span style={{ opacity: 0.7 }}>Menghitung estimasi...</span>
           : <><Send size={13} /> Estimasi Harga</>
