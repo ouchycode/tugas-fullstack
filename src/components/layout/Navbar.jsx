@@ -22,6 +22,11 @@ const Navbar = () => {
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
 
+  const handleLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileOpen(false);
+  };
+
   return (
     <>
       <nav style={{
@@ -41,7 +46,7 @@ const Navbar = () => {
         }}>
 
           {/* Logo */}
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 7, textDecoration: 'none', flexShrink: 0 }}>
+          <Link to="/" onClick={handleLinkClick} style={{ display: 'flex', alignItems: 'center', gap: 7, textDecoration: 'none', flexShrink: 0 }}>
             <div style={{
               width: 24, height: 24,
               background: 'var(--indigo)',
@@ -65,6 +70,7 @@ const Navbar = () => {
                   <NavigationMenu.Link asChild>
                     <Link
                       to={to}
+                      onClick={handleLinkClick}
                       className={`nav-link${pathname === to ? ' nav-link--active' : ''}`}
                     >
                       {label}
@@ -77,7 +83,7 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hide-mobile" style={{ flexShrink: 0 }}>
-            <Link to="/estimator" className="btn-primary" style={{ fontSize: 12, padding: '6px 14px' }}>
+            <Link to="/estimator" onClick={handleLinkClick} className="btn-primary" style={{ fontSize: 12, padding: '6px 14px' }}>
               Cek Harga
             </Link>
           </div>
@@ -116,6 +122,7 @@ const Navbar = () => {
               <Link
                 key={to}
                 to={to}
+                onClick={handleLinkClick}
                 className={`mobile-nav-link${pathname === to ? ' mobile-nav-link--active' : ''}`}
               >
                 {label}
@@ -126,6 +133,7 @@ const Navbar = () => {
           <div style={{ padding: '16px 20px' }}>
             <Link
               to="/estimator"
+              onClick={handleLinkClick}
               className="btn-primary"
               style={{ width: '100%', justifyContent: 'center', padding: '10px 16px', fontSize: 14 }}
             >

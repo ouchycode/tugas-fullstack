@@ -31,6 +31,10 @@ const footerLinks = [
 const Footer = () => {
   const { theme, toggle } = useTheme();
 
+  const handleLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-1)' }}>
       <div className="container" style={{ paddingTop: 48, paddingBottom: 20 }}>
@@ -44,7 +48,7 @@ const Footer = () => {
         }}>
           {/* Brand */}
           <div>
-            <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 7, textDecoration: 'none', marginBottom: 12 }}>
+            <Link to="/" onClick={handleLinkClick} style={{ display: 'flex', alignItems: 'center', gap: 7, textDecoration: 'none', marginBottom: 12 }}>
               <div style={{
                 width: 22, height: 22, background: 'var(--indigo)',
                 borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -67,7 +71,7 @@ const Footer = () => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {links.map(({ label, to, href, icon: Icon }) =>
                   to ? (
-                    <Link key={label} to={to} className="footer-link">
+                    <Link key={label} to={to} onClick={handleLinkClick} className="footer-link">
                       {Icon && <Icon size={12} />} {label}
                     </Link>
                   ) : (
