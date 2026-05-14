@@ -70,7 +70,7 @@ const Dashboard = () => {
 
   return (
     <Tooltip.Provider delayDuration={200}>
-      <div className="page-wrap">
+      <div className="page-wrap" style={{ position: "relative" }}>
 
         {/* Header */}
         <div data-aos="fade-down" className="page-header">
@@ -120,7 +120,12 @@ const Dashboard = () => {
               const Icon = isUp ? TrendingUp : isDown ? TrendingDown : Minus;
 
               return (
-                <div key={item.name} className="leaderboard-row">
+                <div 
+                  key={item.name} 
+                  className="leaderboard-row"
+                  data-aos="fade-up"
+                  data-aos-delay={i * 30}
+                >
                   <div className="leaderboard-rank">{i + 1}</div>
                   <div className="leaderboard-name">{item.name}</div>
                   <div className="leaderboard-rate">

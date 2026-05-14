@@ -59,11 +59,13 @@ const Home = () => (
     {/* ── HERO ── */}
     <section
       style={{
+        position: "relative",
         borderBottom: "1px solid var(--border)",
         padding: "clamp(72px,10vw,120px) 20px clamp(64px,8vw,96px)",
+        overflow: "hidden",
       }}
     >
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1 }}>
         <div
           data-aos="fade-down"
           data-aos-duration="500"

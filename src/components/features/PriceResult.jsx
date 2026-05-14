@@ -48,11 +48,13 @@ const PriceResult = ({ result }) => {
         </div>
 
         <div className="result-price-grid">
-          {rangesMeta.map(({ key, label, icon: Icon, color, bg, border, tip }) => (
+          {rangesMeta.map(({ key, label, icon: Icon, color, bg, border, tip }, index) => (
             <Tooltip.Root key={key}>
               <Tooltip.Trigger asChild>
                 <div
                   className="result-price-cell"
+                  data-aos="zoom-in"
+                  data-aos-delay={index * 100}
                   style={{ background: bg, border: `1px solid ${border}` }}
                   onMouseEnter={e => e.currentTarget.style.borderColor = color}
                   onMouseLeave={e => e.currentTarget.style.borderColor = border}

@@ -5,6 +5,8 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Estimator from './pages/Estimator';
 import Dashboard from './pages/Dashboard';
+import NotFound from './pages/NotFound';
+import ScrollToTop from './components/common/ScrollToTop';
 
 function App() {
   const { pathname } = useLocation();
@@ -21,9 +23,11 @@ function App() {
           <Route path="/"          element={<Home />} />
           <Route path="/estimator" element={<Estimator />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="*"          element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

@@ -36,30 +36,22 @@ const Footer = () => {
   };
 
   return (
-    <footer style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-1)' }}>
-      <div className="container" style={{ paddingTop: 48, paddingBottom: 20 }}>
+    <footer className="footer-wrap">
+      <div className="container footer-inner">
 
         {/* Top section */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-          gap: 32,
-          marginBottom: 40,
-        }}>
+        <div className="footer-grid">
           {/* Brand */}
           <div>
-            <Link to="/" onClick={handleLinkClick} style={{ display: 'flex', alignItems: 'center', gap: 7, textDecoration: 'none', marginBottom: 12 }}>
-              <div style={{
-                width: 22, height: 22, background: 'var(--indigo)',
-                borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
+            <Link to="/" onClick={handleLinkClick} className="footer-brand">
+              <div className="footer-brand-logo">
                 <Zap size={11} color="#ffffff" strokeWidth={2.5} />
               </div>
-              <span style={{ fontWeight: 600, fontSize: 13, letterSpacing: '-0.02em', color: 'var(--fg)' }}>
+              <span className="footer-brand-title">
                 FairPriceFinder
               </span>
             </Link>
-            <p style={{ fontSize: 12, color: 'var(--fg-2)', lineHeight: 1.6, maxWidth: 220, letterSpacing: '-0.005em' }}>
+            <p className="footer-brand-desc">
               Estimasi harga jasa freelance Indonesia yang adil dan berbasis data.
             </p>
           </div>
@@ -67,8 +59,8 @@ const Footer = () => {
           {/* Link columns */}
           {footerLinks.map(({ title, links }) => (
             <div key={title}>
-              <p className="label-mono" style={{ marginBottom: 14, fontSize: 10 }}>{title}</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <p className="label-mono footer-col-title">{title}</p>
+              <div className="footer-links-wrap">
                 {links.map(({ label, to, href, icon: Icon }) =>
                   to ? (
                     <Link key={label} to={to} onClick={handleLinkClick} className="footer-link">
@@ -90,17 +82,10 @@ const Footer = () => {
         <Separator.Root style={{ height: 1, background: 'var(--border)' }} />
 
         {/* Bottom bar — copyright + theme toggle */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '16px 0 4px',
-          gap: 16,
-          flexWrap: 'wrap',
-        }}>
+        <div className="footer-bottom">
           <p className="footer-copyright">© 2025 FairPrice Finder · CC26-PSU164</p>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div className="footer-bottom-right">
             <p className="footer-copyright">Capstone Project · Dicoding × Dbs Foundation</p>
 
             {/* Theme toggle — Linear style */}

@@ -7,27 +7,31 @@ const Estimator = () => {
   const [result, setResult] = useState(null);
 
   return (
-    <div className="page-wrap--narrow">
-      <p className="label-mono" style={{ marginBottom: 10 }}>Price Estimator</p>
-      <h1 className="page-subtitle">Berapa nilai jasa kamu?</h1>
-      <p className="page-desc">
-        Isi kategori jasa, skill yang dikuasai, dan estimasi durasi pengerjaan.
-      </p>
-
-      <div className="alert alert--info">
-        <Info size={13} color="var(--indigo)" style={{ marginTop: 1, flexShrink: 0 }} />
-        <p className="alert__text">
-          Semakin spesifik skill yang kamu isi, semakin akurat estimasi harganya.
+    <div className="page-wrap--narrow" style={{ position: "relative" }}>
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <p data-aos="fade-down" className="label-mono" style={{ marginBottom: 10 }}>Price Estimator</p>
+        <h1 data-aos="fade-up" data-aos-delay="50" className="page-subtitle">Berapa nilai jasa kamu?</h1>
+        <p data-aos="fade-up" data-aos-delay="100" className="page-desc">
+          Isi kategori jasa, skill yang dikuasai, dan estimasi durasi pengerjaan.
         </p>
-      </div>
 
-      <PriceEstimatorForm onResult={setResult} />
-
-      {result && (
-        <div style={{ marginTop: 20 }}>
-          <PriceResult result={result} />
+        <div data-aos="fade-up" data-aos-delay="150" className="alert alert--info">
+          <Info size={13} color="var(--indigo)" style={{ marginTop: 1, flexShrink: 0 }} />
+          <p className="alert__text">
+            Semakin spesifik skill yang kamu isi, semakin akurat estimasi harganya.
+          </p>
         </div>
-      )}
+
+        <div data-aos="fade-up" data-aos-delay="200">
+          <PriceEstimatorForm onResult={setResult} />
+        </div>
+
+        {result && (
+          <div data-aos="zoom-in" data-aos-delay="100" style={{ marginTop: 20 }}>
+            <PriceResult result={result} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
