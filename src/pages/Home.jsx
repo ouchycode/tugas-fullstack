@@ -132,12 +132,6 @@ const Home = () => (
               data-aos="fade-up"
               data-aos-delay={i * 80}
               className="stats-bar__item"
-              style={{
-                paddingRight: i < stats.length - 1 ? 40 : 0,
-                paddingLeft: i > 0 ? 40 : 0,
-                borderRight:
-                  i < stats.length - 1 ? "1px solid var(--border)" : "none",
-              }}
             >
               <p className="stats-bar__val">{val}</p>
               <p className="stats-bar__label">

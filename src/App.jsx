@@ -6,10 +6,6 @@ import Home from './pages/Home';
 import Estimator from './pages/Estimator';
 import Dashboard from './pages/Dashboard';
 
-// Apply saved theme before first render (avoids flash)
-const saved = (() => { try { return localStorage.getItem('fpf-theme'); } catch { return null; } })();
-document.documentElement.setAttribute('data-theme', saved || 'dark');
-
 function App() {
   const { pathname } = useLocation();
 

@@ -3,8 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { ThemeProvider } from './contexts/ThemeContext';
 import App from './App';
 import './styles/index.css';
+
+// Prevent flash: set data-theme before first React render
+try {
+  const saved = localStorage.getItem('fpf-theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+} catch { /* ignore */ }
 
 function Root() {
   useEffect(() => {
@@ -18,7 +25,9 @@ function Root() {
 
   return (
     <BrowserRouter>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

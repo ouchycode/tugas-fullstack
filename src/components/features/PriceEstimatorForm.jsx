@@ -3,7 +3,7 @@ import { Send, AlertCircle, ChevronDown, Check } from 'lucide-react';
 import * as Select from '@radix-ui/react-select';
 import * as Label from '@radix-ui/react-label';
 import SkillTagInput from './SkillTagInput';
-import { predictPrice } from '../../services/api';
+import { estimatePrice } from '../../services/api';
 
 const CATEGORIES = [
   'Web Development', 'Mobile Development', 'UI/UX Design',
@@ -13,10 +13,10 @@ const CATEGORIES = [
 
 const FieldLabel = ({ htmlFor, children, hint }) => (
   <div style={{ marginBottom: 7, display: 'flex', alignItems: 'center', gap: 6 }}>
-    <Label.Root htmlFor={htmlFor} className="label-mono" style={{ fontSize: 10.5, cursor: 'default' }}>
+    <Label.Root htmlFor={htmlFor} className="label-mono" style={{ cursor: 'default' }}>
       {children}
     </Label.Root>
-    {hint && <span style={{ fontSize: 11, color: 'var(--fg-3)' }}>{hint}</span>}
+    {hint && <span style={{ color: 'var(--fg-3)' }}>{hint}</span>}
   </div>
 );
 
@@ -36,7 +36,7 @@ const PriceEstimatorForm = ({ onResult }) => {
     setError('');
     setLoading(true);
     try {
-      const { data } = await predictPrice({ category, skills, duration: Number(duration) });
+      const { data } = await estimatePrice({ category, skills, duration: Number(duration) });
       onResult(data);
     } catch {
       setError('Gagal mengambil estimasi. Coba lagi.');
@@ -112,7 +112,7 @@ const PriceEstimatorForm = ({ onResult }) => {
         type="submit"
         disabled={loading}
         className="btn-primary"
-        style={{ width: '100%', padding: '9px 16px', fontSize: 13.5, justifyContent: 'center' }}
+        style={{ width: '100%', padding: '9px 16px', justifyContent: 'center' }}
       >
         {loading
           ? <span style={{ opacity: 0.7 }}>Menghitung estimasi...</span>
